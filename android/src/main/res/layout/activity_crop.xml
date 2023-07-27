@@ -8,7 +8,6 @@
         android:id="@+id/picture_cropped"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/bottom_view"
         android:layout_marginTop="?attr/actionBarSize"
         android:layout_centerInParent="true" />
 
