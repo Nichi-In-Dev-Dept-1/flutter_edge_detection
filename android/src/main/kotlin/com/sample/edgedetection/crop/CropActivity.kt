@@ -40,6 +40,14 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
     override fun initPresenter() {
         val initialBundle = intent.getBundleExtra(EdgeDetectionHandler.INITIAL_BUNDLE) as Bundle
         mPresenter = CropPresenter(this, initialBundle)
+        val imageView : ImageView = findViewById(R.id.paper)
+        if (initialBundle.getBoolean(EdgeDetectionHandler.FROM_GALLERY, false)) {
+            imageView.scaleType = ImageView.ScaleType.FIT_CENTER
+            imageView.adjustViewBounds = true
+        } else {
+            imageView.scaleType = ImageView.ScaleType.FIT_XY
+            imageView.adjustViewBounds = false
+        }
         findViewById<ImageView>(R.id.crop).setOnClickListener {
             Log.e(TAG, "Crop touched!")
             mPresenter.crop()
