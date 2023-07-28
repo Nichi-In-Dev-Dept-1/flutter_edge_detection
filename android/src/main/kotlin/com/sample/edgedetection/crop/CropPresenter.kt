@@ -50,6 +50,7 @@ class CropPresenter(
             iCropView.getCroppedPaper().setImageBitmap(croppedBitmap)
             iCropView.getPaper().visibility = View.GONE
             iCropView.getPaperRect().visibility = View.GONE
+            crop()
         } else {
             Utils.matToBitmap(picture, bitmap, true)
             iCropView.getPaper().setImageBitmap(bitmap)
