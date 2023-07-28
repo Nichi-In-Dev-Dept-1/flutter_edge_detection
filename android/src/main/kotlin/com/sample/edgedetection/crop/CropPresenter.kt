@@ -1,5 +1,6 @@
 package com.sample.edgedetection.crop
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.os.Bundle
@@ -34,14 +35,29 @@ class CropPresenter(
 
     fun onViewsReady(paperWidth: Int, paperHeight: Int) {
         iCropView.getPaperRect().onCorners2Crop(corners, picture?.size(), paperWidth, paperHeight)
+        Log.d("CROP","bitmap width ${picture?.width()}")
+        Log.d("CROP","bitmap height ${picture?.height()}")
+        Log.d("PAPER","bitmap width $paperWidth")
+        Log.d("PAPER","bitmap height $paperHeight")
         val bitmap = Bitmap.createBitmap(
             picture?.width() ?: 1080, picture?.height()
                 ?: 1920, Bitmap.Config.ARGB_8888
         )
-        Utils.matToBitmap(picture, bitmap, true)
-        iCropView.getPaper().setImageBitmap(bitmap)
+
+        if (bitmap.width > bitmap.height) {
+            croppedBitmap = bitmap
+            Utils.matToBitmap(picture, croppedBitmap)
+            iCropView.getCroppedPaper().setImageBitmap(croppedBitmap)
+            iCropView.getPaper().visibility = View.GONE
+            iCropView.getPaperRect().visibility = View.GONE
+        } else {
+            Utils.matToBitmap(picture, bitmap, true)
+            iCropView.getPaper().setImageBitmap(bitmap)
+        }
+
     }
 
+    @SuppressLint("CheckResult")
     fun crop() {
         if (picture == null) {
             Log.i(TAG, "picture null?")
@@ -60,6 +76,8 @@ class CropPresenter(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { pc ->
                 Log.i(TAG, "cropped picture: $pc")
+                Log.i("POST_CROP","bitmap width ${pc.width()}")
+                Log.i("POST_CROP","bitmap height ${pc.height()}")
                 croppedPicture = pc
                 croppedBitmap =
                     Bitmap.createBitmap(pc.width(), pc.height(), Bitmap.Config.ARGB_8888)
@@ -70,6 +88,7 @@ class CropPresenter(
             }
     }
 
+    @SuppressLint("CheckResult")
     fun enhance() {
         if (croppedBitmap == null) {
             Log.i(TAG, "picture null?")

@@ -29,7 +29,8 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
         super.onCreate(savedInstanceState)
         findViewById<View>(R.id.paper).post {
             // we have to initialize everything in post when the view has been drawn and we have the actual height and width of the whole view
-            mPresenter.onViewsReady(findViewById<View>(R.id.paper).width, findViewById<View>(R.id.paper).height)
+            val paperView = findViewById<View>(R.id.paper)
+            mPresenter.onViewsReady(paperView.width, paperView.height)
         }
     }
 

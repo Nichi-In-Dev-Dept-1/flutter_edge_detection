@@ -5,18 +5,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+<!--  Pragadeesh changes
+        android:layout_marginTop="82dp"
+        android:layout_above="@id/bottom_view"
+  -->
+
     <SurfaceView
         android:id="@+id/surface"
         android:layout_width="match_parent"
+        android:layout_marginTop="82dp"
+        android:layout_above="@id/bottom_view"
         android:layout_height="match_parent" />
 
+    <!--  Pragadeesh changes
+        android:layout_marginTop="82dp"
+        android:layout_above="@id/bottom_view"
+  -->
     <com.sample.edgedetection.view.PaperRectangle
         android:id="@+id/paper_rect"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="82dp"
+        android:layout_above="@id/bottom_view"
         android:background="@color/colorTransparent" />
 
+    <!--  Pragadeesh changes
+        android:layout_marginTop="82dp"
+        android:layout_above="@id/bottom_view"
+  -->
     <RelativeLayout
+        android:id="@+id/bottom_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
