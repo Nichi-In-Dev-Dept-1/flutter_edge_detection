@@ -20,7 +20,6 @@ public class SwiftEdgeDetectionPlugin: NSObject, FlutterPlugin, UIApplicationDel
         {
             if let viewController = UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController {
                 let destinationViewController = HomeViewController()
-                destinationViewController.modalPresentationStyle = .fullScreen
                 destinationViewController.setParams(saveTo: saveTo, canUseGallery: canUseGallery)
                 destinationViewController._result = result
                 destinationViewController.isModalInPresentation = true
@@ -31,7 +30,6 @@ public class SwiftEdgeDetectionPlugin: NSObject, FlutterPlugin, UIApplicationDel
         {
             if let viewController = UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController {
                 let destinationViewController = HomeViewController()
-                destinationViewController.modalPresentationStyle = .fullScreen
                 destinationViewController.setParams(saveTo: saveTo, canUseGallery: canUseGallery)
                 destinationViewController._result = result
                 destinationViewController.isModalInPresentation = true
