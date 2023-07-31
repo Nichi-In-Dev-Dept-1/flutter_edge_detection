@@ -17,6 +17,7 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
 
             if #available(iOS 13.0, *) {
                 cameraController.isModalInPresentation = true
+                cameraController.modalPresentationStyle = .fullScreen
                 cameraController.overrideUserInterfaceStyle = .dark
                 cameraController.view.backgroundColor = .black
             }
@@ -81,6 +82,7 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
             scanPhotoVC.saveTo = self.saveTo
             if #available(iOS 13.0, *) {
                 scanPhotoVC.isModalInPresentation = true
+                scanPhotoVC.modalPresentationStyle = .fullScreen
                 scanPhotoVC.overrideUserInterfaceStyle = .dark
             }
             window.rootViewController?.present(scanPhotoVC, animated: true)

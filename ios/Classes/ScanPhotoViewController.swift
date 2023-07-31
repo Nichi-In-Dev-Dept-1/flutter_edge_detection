@@ -30,6 +30,7 @@ class ScanPhotoViewController: UIViewController, ImageScannerControllerDelegate,
         
         if #available(iOS 13.0, *) {
             scannerVC.isModalInPresentation = true
+            scannerVC.modalPresentationStyle = .fullScreen
             scannerVC.overrideUserInterfaceStyle = .dark
             scannerVC.view.backgroundColor = .black
         }
@@ -59,7 +60,8 @@ class ScanPhotoViewController: UIViewController, ImageScannerControllerDelegate,
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
-            
+            imagePicker.isModalInPresentation = true
+            imagePicker.modalPresentationStyle = .fullScreen
             present(imagePicker, animated: true)
         }
     }
