@@ -30,7 +30,6 @@ class ScanPhotoViewController: UIViewController, ImageScannerControllerDelegate,
         
         if #available(iOS 13.0, *) {
             scannerVC.isModalInPresentation = true
-            scannerVC.modalPresentationStyle = .fullScreen
             scannerVC.overrideUserInterfaceStyle = .dark
             scannerVC.view.backgroundColor = .black
         }
