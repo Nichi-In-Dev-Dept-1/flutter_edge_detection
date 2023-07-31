@@ -21,7 +21,7 @@ public class SwiftEdgeDetectionPlugin: NSObject, FlutterPlugin, UIApplicationDel
             if let viewController = UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController {
                 let destinationViewController = HomeViewController()
                 destinationViewController.isModalInPresentation = true
-\                destinationViewController.setParams(saveTo: saveTo, canUseGallery: canUseGallery)
+                destinationViewController.setParams(saveTo: saveTo, canUseGallery: canUseGallery)
                 destinationViewController._result = result
                 viewController.present(destinationViewController,animated: true,completion: nil);
             }
