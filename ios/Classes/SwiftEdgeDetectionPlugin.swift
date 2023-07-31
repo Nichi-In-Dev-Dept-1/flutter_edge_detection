@@ -23,6 +23,7 @@ public class SwiftEdgeDetectionPlugin: NSObject, FlutterPlugin, UIApplicationDel
                 destinationViewController.modalPresentationStyle = .fullScreen
                 destinationViewController.setParams(saveTo: saveTo, canUseGallery: canUseGallery)
                 destinationViewController._result = result
+                destinationViewController.isModalInPresentation = true
                 viewController.present(destinationViewController,animated: true,completion: nil);
             }
         }
@@ -33,6 +34,7 @@ public class SwiftEdgeDetectionPlugin: NSObject, FlutterPlugin, UIApplicationDel
                 destinationViewController.modalPresentationStyle = .fullScreen
                 destinationViewController.setParams(saveTo: saveTo, canUseGallery: canUseGallery)
                 destinationViewController._result = result
+                destinationViewController.isModalInPresentation = true
                 destinationViewController.selectPhoto();
             }
         }
