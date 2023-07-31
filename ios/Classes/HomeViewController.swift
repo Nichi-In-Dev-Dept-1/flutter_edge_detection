@@ -18,7 +18,6 @@ class HomeViewController: UIViewController, ImageScannerControllerDelegate {
             if #available(iOS 13.0, *) {
                 cameraController.isModalInPresentation = true
                 cameraController.overrideUserInterfaceStyle = .dark
-                cameraController.modalPresentationStyle = .fullScreen
                 cameraController.view.backgroundColor = .black
             }
             
