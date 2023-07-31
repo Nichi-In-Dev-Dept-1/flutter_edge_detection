@@ -20,8 +20,8 @@ public class SwiftEdgeDetectionPlugin: NSObject, FlutterPlugin, UIApplicationDel
         {
             if let viewController = UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController {
                 let destinationViewController = HomeViewController()
-                destinationViewController.modalPresentationStyle = .fullScreen
-                destinationViewController.setParams(saveTo: saveTo, canUseGallery: canUseGallery)
+                destinationViewController.isModalInPresentation = true
+\                destinationViewController.setParams(saveTo: saveTo, canUseGallery: canUseGallery)
                 destinationViewController._result = result
                 viewController.present(destinationViewController,animated: true,completion: nil);
             }
@@ -30,7 +30,7 @@ public class SwiftEdgeDetectionPlugin: NSObject, FlutterPlugin, UIApplicationDel
         {
             if let viewController = UIApplication.shared.delegate?.window??.rootViewController as? FlutterViewController {
                 let destinationViewController = HomeViewController()
-                destinationViewController.modalPresentationStyle = .fullScreen
+                destinationViewController.isModalInPresentation = true
                 destinationViewController.setParams(saveTo: saveTo, canUseGallery: canUseGallery)
                 destinationViewController._result = result
                 destinationViewController.selectPhoto();
