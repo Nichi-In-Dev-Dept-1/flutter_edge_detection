@@ -44,18 +44,18 @@ class CropPresenter(
                 ?: 1920, Bitmap.Config.ARGB_8888
         )
 
-        if (bitmap.width > bitmap.height) {
-            croppedBitmap = bitmap
-            Utils.matToBitmap(picture, croppedBitmap)
-            iCropView.getCroppedPaper().setImageBitmap(croppedBitmap)
-            iCropView.getPaper().visibility = View.GONE
-            iCropView.getPaperRect().visibility = View.GONE
-            crop()
-        } else {
+
+//       if (bitmap.width > bitmap.height) {
+//            croppedBitmap = bitmap
+//            Utils.matToBitmap(picture, croppedBitmap)
+//            iCropView.getCroppedPaper().setImageBitmap(croppedBitmap)
+//            iCropView.getPaper().visibility = View.GONE
+//            iCropView.getPaperRect().visibility = View.GONE
+//            crop()
+//        } else {
             Utils.matToBitmap(picture, bitmap, true)
             iCropView.getPaper().setImageBitmap(bitmap)
-        }
-
+//        }
     }
 
     @SuppressLint("CheckResult")
