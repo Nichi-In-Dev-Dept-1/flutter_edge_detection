@@ -1,6 +1,7 @@
 package com.sample.edgedetection.crop
 
 import android.app.Activity
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -23,6 +24,11 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
     override fun prepare() {
         this.initialBundle = intent.getBundleExtra(EdgeDetectionHandler.INITIAL_BUNDLE) as Bundle
         this.title = initialBundle.getString(EdgeDetectionHandler.CROP_TITLE)
+
+        if(resources.getBoolean(R.bool.portrait_only)){
+            Log.d("ORIENTATION changeeee","${resources.getBoolean(R.bool.portrait_only)}")
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
