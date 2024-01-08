@@ -1,5 +1,6 @@
 package com.sample.edgedetection.scan
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -43,6 +44,11 @@ import java.util.concurrent.Executors
 import kotlin.math.max
 import kotlin.math.min
 import android.util.Size as SizeB
+import 	android.view.Surface
+import android.content.res.Configuration
+import android.hardware.Camera.CameraInfo
+import android.os.Build
+
 
 class ScanPresenter constructor(
     private val context: Context,
@@ -61,6 +67,8 @@ class ScanPresenter constructor(
 
     private var mLastClickTime = 0L
     private var shutted: Boolean = true
+
+    private var degrees = 0
 
     init {
         mSurfaceHolder.addCallback(this)
@@ -218,7 +226,45 @@ class ScanPresenter constructor(
         param?.flashMode = Camera.Parameters.FLASH_MODE_OFF
 
         mCamera?.parameters = param
-        mCamera?.setDisplayOrientation(90)
+
+//        val orientation: Int = context.resources.configuration.orientation
+//        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+//            mCamera?.setDisplayOrientation(90)
+//        }
+
+
+        val rotation: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            context.display?.rotation ?: 0
+        } else {
+            ScanActivity().windowManager.defaultDisplay.rotation
+        }
+
+        Log.d(TAG,"SCAN ROTATION $rotation")
+
+        degrees = when (rotation) {
+            Surface.ROTATION_0 -> 90
+            Surface.ROTATION_90 -> 90
+            Surface.ROTATION_180 -> 270
+            Surface.ROTATION_270 -> 180
+            else->{
+                90
+            }
+        }
+
+        if (context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+        {
+            mCamera?.parameters?.set("orientation", "portrait")
+            mCamera?.parameters?.set("rotation", degrees)
+            mCamera?.setDisplayOrientation(degrees)
+        }
+        if (context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            mCamera?.parameters?.set("orientation", "landscape")
+            mCamera?.parameters?.set("rotation", degrees)
+            if(rotation == Surface.ROTATION_270){
+                mCamera?.setDisplayOrientation(180)
+            }
+        }
         mCamera?.enableShutterSound(false)
     }
 
@@ -264,7 +310,16 @@ class ScanPresenter constructor(
                 )
                 mat.put(0, 0, p0)
                 val pic = Imgcodecs.imdecode(mat, Imgcodecs.CV_LOAD_IMAGE_UNCHANGED)
-                Core.rotate(pic, pic, Core.ROTATE_90_CLOCKWISE)
+
+                Log.i(TAG, "Degree rotate $degrees" )
+
+                if(degrees == 90 && context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT ){
+                    Core.rotate(pic, pic, Core.ROTATE_90_CLOCKWISE)
+                } else if(degrees == 270  )(
+                    Core.rotate(pic, pic, Core.ROTATE_90_COUNTERCLOCKWISE)
+                ) else if (degrees == 180 ) {
+                    Core.rotate(pic,pic,Core.ROTATE_180)
+                }
                 mat.release()
                 detectEdge(pic)
                 shutted = true
