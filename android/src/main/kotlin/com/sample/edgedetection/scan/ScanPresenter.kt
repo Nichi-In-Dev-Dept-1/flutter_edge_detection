@@ -127,6 +127,7 @@ class ScanPresenter constructor(
     }
 
     private fun updateCamera() {
+        Log.d("TAG","SURFACE UPDATE")
         if (null == mCamera) {
             return
         }
@@ -279,14 +280,18 @@ class ScanPresenter constructor(
     }
 
     override fun surfaceCreated(p0: SurfaceHolder) {
+        Log.d("TAG","SURFACE CREATED")
         initCamera()
     }
 
     override fun surfaceChanged(p0: SurfaceHolder, p1: Int, p2: Int, p3: Int) {
+        Log.d("TAG","SURFACE UPDATE")
+        initCamera()
         updateCamera()
     }
 
     override fun surfaceDestroyed(p0: SurfaceHolder) {
+        Log.d("TAG","SURFACE DESTROY")
         synchronized(this) {
             mCamera?.stopPreview()
             mCamera?.setPreviewCallback(null)
