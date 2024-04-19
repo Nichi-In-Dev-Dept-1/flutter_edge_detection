@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.BitmapFactory
 import android.graphics.Point
 import android.graphics.Rect
@@ -13,10 +14,13 @@ import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.hardware.camera2.params.StreamConfigurationMap
+import android.hardware.display.DisplayManager
+import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
 import android.view.Display
+import android.view.Surface
 import android.view.SurfaceHolder
 import android.widget.Toast
 import com.sample.edgedetection.EdgeDetectionHandler
@@ -44,6 +48,7 @@ import kotlin.math.max
 import kotlin.math.min
 import android.util.Size as SizeB
 
+
 class ScanPresenter constructor(
     private val context: Context,
     private val iView: IScanView.Proxy,
@@ -61,6 +66,8 @@ class ScanPresenter constructor(
 
     private var mLastClickTime = 0L
     private var shutted: Boolean = true
+
+    private var degrees = 0
 
     init {
         mSurfaceHolder.addCallback(this)
@@ -119,6 +126,7 @@ class ScanPresenter constructor(
     }
 
     private fun updateCamera() {
+        Log.d("TAG","SURFACE UPDATE")
         if (null == mCamera) {
             return
         }
@@ -218,7 +226,48 @@ class ScanPresenter constructor(
         param?.flashMode = Camera.Parameters.FLASH_MODE_OFF
 
         mCamera?.parameters = param
-        mCamera?.setDisplayOrientation(90)
+
+//        val orientation: Int = context.resources.configuration.orientation
+//        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+//            mCamera?.setDisplayOrientation(90)
+//        }
+
+
+        val rotation: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            context.display?.rotation ?: 0
+        } else {
+            val displayManager = context.getSystemService(
+                Context.DISPLAY_SERVICE
+            ) as DisplayManager
+            displayManager.getDisplay(Display.DEFAULT_DISPLAY).rotation
+        }
+
+        Log.d(TAG,"SCAN ROTATION $rotation")
+
+        degrees = when (rotation) {
+            Surface.ROTATION_0 -> 90
+            Surface.ROTATION_90 -> 90
+            Surface.ROTATION_180 -> 270
+            Surface.ROTATION_270 -> 180
+            else->{
+                90
+            }
+        }
+
+        if (context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+        {
+            mCamera?.parameters?.set("orientation", "portrait")
+            mCamera?.parameters?.set("rotation", degrees)
+            mCamera?.setDisplayOrientation(degrees)
+        }
+        if (context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            mCamera?.parameters?.set("orientation", "landscape")
+            mCamera?.parameters?.set("rotation", degrees)
+            if(rotation == Surface.ROTATION_270){
+                mCamera?.setDisplayOrientation(180)
+            }
+        }
         mCamera?.enableShutterSound(false)
     }
 
@@ -233,14 +282,18 @@ class ScanPresenter constructor(
     }
 
     override fun surfaceCreated(p0: SurfaceHolder) {
+        Log.d("TAG","SURFACE CREATED")
         initCamera()
     }
 
     override fun surfaceChanged(p0: SurfaceHolder, p1: Int, p2: Int, p3: Int) {
+        Log.d("TAG","SURFACE UPDATE")
+        initCamera()
         updateCamera()
     }
 
     override fun surfaceDestroyed(p0: SurfaceHolder) {
+        Log.d("TAG","SURFACE DESTROY")
         synchronized(this) {
             mCamera?.stopPreview()
             mCamera?.setPreviewCallback(null)
@@ -264,7 +317,16 @@ class ScanPresenter constructor(
                 )
                 mat.put(0, 0, p0)
                 val pic = Imgcodecs.imdecode(mat, Imgcodecs.CV_LOAD_IMAGE_UNCHANGED)
-                Core.rotate(pic, pic, Core.ROTATE_90_CLOCKWISE)
+
+                Log.i(TAG, "Degree rotate $degrees" )
+
+                if(degrees == 90 && context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT ){
+                    Core.rotate(pic, pic, Core.ROTATE_90_CLOCKWISE)
+                } else if(degrees == 270  )(
+                    Core.rotate(pic, pic, Core.ROTATE_90_COUNTERCLOCKWISE)
+                ) else if (degrees == 180 ) {
+                    Core.rotate(pic,pic,Core.ROTATE_180)
+                }
                 mat.release()
                 detectEdge(pic)
                 shutted = true
