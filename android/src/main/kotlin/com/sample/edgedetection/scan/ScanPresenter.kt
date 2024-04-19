@@ -1,10 +1,10 @@
 package com.sample.edgedetection.scan
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.BitmapFactory
 import android.graphics.Point
 import android.graphics.Rect
@@ -14,10 +14,13 @@ import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.hardware.camera2.params.StreamConfigurationMap
+import android.hardware.display.DisplayManager
+import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
 import android.view.Display
+import android.view.Surface
 import android.view.SurfaceHolder
 import android.widget.Toast
 import com.sample.edgedetection.EdgeDetectionHandler
@@ -44,10 +47,6 @@ import java.util.concurrent.Executors
 import kotlin.math.max
 import kotlin.math.min
 import android.util.Size as SizeB
-import 	android.view.Surface
-import android.content.res.Configuration
-import android.hardware.Camera.CameraInfo
-import android.os.Build
 
 
 class ScanPresenter constructor(
@@ -237,7 +236,10 @@ class ScanPresenter constructor(
         val rotation: Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             context.display?.rotation ?: 0
         } else {
-            ScanActivity().windowManager.defaultDisplay.rotation
+            val displayManager = context.getSystemService(
+                Context.DISPLAY_SERVICE
+            ) as DisplayManager
+            displayManager.getDisplay(Display.DEFAULT_DISPLAY).rotation
         }
 
         Log.d(TAG,"SCAN ROTATION $rotation")
