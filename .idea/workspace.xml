@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f08b3923-f33b-4d39-b5f6-cea7d389432e" name="Default Changelist" comment="Blank screen issue fix">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/sample/edgedetection/EdgeDetectionPlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/sample/edgedetection/EdgeDetectionPlugin.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/sample/edgedetection/crop/CropActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/sample/edgedetection/crop/CropActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/sample/edgedetection/scan/ScanActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/sample/edgedetection/scan/ScanActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/sample/edgedetection/view/PaperRectangle.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/sample/edgedetection/view/PaperRectangle.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/res/layout/activity_crop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/res/layout/activity_crop.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/res/layout/activity_scan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/res/layout/activity_scan.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/edge_detection.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/edge_detection.dart" afterDir="false" />
-    </list>
+    <list default="true" id="f08b3923-f33b-4d39-b5f6-cea7d389432e" name="Default Changelist" comment="Adding Instructions to Scanner Cropping and Cropped Screens" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,7 +74,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713518420914</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Adding Instructions to Scanner Cropping and Cropped Screens">
+      <option name="closed" value="true" />
+      <created>1734688675228</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1734688675228</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -109,6 +104,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Blank screen issue fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Blank screen issue fix" />
+    <MESSAGE value="Adding Instructions to Scanner Cropping and Cropped Screens" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Instructions to Scanner Cropping and Cropped Screens" />
   </component>
 </project>
