@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.exifinterface.media.ExifInterface
@@ -31,10 +32,13 @@ class ScanActivity : BaseActivity(), IScanView.Proxy {
 
     private lateinit var mPresenter: ScanPresenter
 
+    private lateinit var initialBundle: Bundle
+
+
     override fun provideContentViewId(): Int = R.layout.activity_scan
 
     override fun initPresenter() {
-        val initialBundle = intent.getBundleExtra(EdgeDetectionHandler.INITIAL_BUNDLE) as Bundle
+         this.initialBundle = intent.getBundleExtra(EdgeDetectionHandler.INITIAL_BUNDLE) as Bundle
         mPresenter = ScanPresenter(this, this, initialBundle)
     }
 
@@ -44,6 +48,9 @@ class ScanActivity : BaseActivity(), IScanView.Proxy {
             Log.d("ORIENTATION changeeee","${resources.getBoolean(R.bool.portrait_only)}")
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
         }
+
+        findViewById<TextView>(R.id.scanningNoteText).text = initialBundle.getString(EdgeDetectionHandler.SCANNING_NOTE)
+
 
         if (!OpenCVLoader.initDebug()) {
             Log.i(TAG, "loading opencv error, exit")

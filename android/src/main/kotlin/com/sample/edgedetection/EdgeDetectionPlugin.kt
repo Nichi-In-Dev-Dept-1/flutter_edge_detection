@@ -50,6 +50,9 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
         const val CROP_TITLE = "crop_title"
         const val CROP_BLACK_WHITE_TITLE = "crop_black_white_title"
         const val CROP_RESET_TITLE = "crop_reset_title"
+        const val SCANNING_NOTE = "scanning_note"
+        const val CROPPING_NOTE = "cropping_note"
+        const val CROPPED_NOTE = "cropped_note"
     }
 
     fun setActivityPluginBinding(activityPluginBinding: ActivityPluginBinding) {
@@ -115,6 +118,9 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
         bundle.putString(CROP_TITLE, call.argument<String>(CROP_TITLE) as String)
         bundle.putString(CROP_BLACK_WHITE_TITLE, call.argument<String>(CROP_BLACK_WHITE_TITLE) as String)
         bundle.putString(CROP_RESET_TITLE, call.argument<String>(CROP_RESET_TITLE) as String)
+        bundle.putString(SCANNING_NOTE, call.argument<String>(SCANNING_NOTE) as String)
+        bundle.putString(CROPPED_NOTE, call.argument<String>(CROPPED_NOTE) as String)
+        bundle.putString(CROPPING_NOTE, call.argument<String>(CROPPING_NOTE) as String)
         bundle.putBoolean(CAN_USE_GALLERY, call.argument<Boolean>(CAN_USE_GALLERY) as Boolean)
 
         initialIntent.putExtra(INITIAL_BUNDLE, bundle)
@@ -135,6 +141,8 @@ class EdgeDetectionHandler : MethodCallHandler, PluginRegistry.ActivityResultLis
         bundle.putString(CROP_BLACK_WHITE_TITLE, call.argument<String>(CROP_BLACK_WHITE_TITLE) as String )
         bundle.putString(CROP_RESET_TITLE, call.argument<String>(CROP_RESET_TITLE) as String)
         bundle.putBoolean(FROM_GALLERY, call.argument<Boolean>(FROM_GALLERY) as Boolean)
+        bundle.putString(CROPPED_NOTE, call.argument<String>(CROPPED_NOTE) as String)
+        bundle.putString(CROPPING_NOTE, call.argument<String>(CROPPING_NOTE) as String)
 
         initialIntent.putExtra(INITIAL_BUNDLE, bundle)
 
