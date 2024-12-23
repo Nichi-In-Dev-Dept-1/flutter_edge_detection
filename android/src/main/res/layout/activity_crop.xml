@@ -98,7 +98,6 @@
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:padding="12dp"
-        android:text="@string/croppingText"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold" />

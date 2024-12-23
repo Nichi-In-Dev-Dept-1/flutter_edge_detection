@@ -15,7 +15,4 @@
     <string name="next">Next</string>
     <string name="done">Done</string>
 
-    <string name="scanningText">身分証明書を四角の枠内に収まるようにして、ピントが合いましたら下のボタンを押してください。</string>
-    <string name="croppingText">必要であれば、枠の角をドラッグして調整してください。調整が終わりましたら、下のトリミングボタンを押してください。</string>
-    <string name="croppedText">画像がOKであれば「tick mark」を押してください。</string>
 </resources>
