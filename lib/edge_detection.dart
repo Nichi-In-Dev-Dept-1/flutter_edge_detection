@@ -13,6 +13,9 @@ class EdgeDetection {
         String androidCropTitle: "Crop",
         String androidCropBlackWhiteTitle: "Black White",
         String androidCropReset: "Reset",
+        String scanningNote: "scanning_note",
+        String croppingNote: "cropping_note",
+        String croppedNote: "cropped_note",
       }) async {
     return await _channel.invokeMethod('edge_detect', {
       'save_to': saveTo,
@@ -21,6 +24,9 @@ class EdgeDetection {
       'crop_title': androidCropTitle,
       'crop_black_white_title': androidCropBlackWhiteTitle,
       'crop_reset_title': androidCropReset,
+      'scanning_note': scanningNote,
+      'cropping_note': croppingNote,
+      'cropped_note': croppedNote,
     });
   }
 
@@ -30,6 +36,8 @@ class EdgeDetection {
         String androidCropTitle: "Crop",
         String androidCropBlackWhiteTitle: "Black White",
         String androidCropReset: "Reset",
+        String croppingNote: "cropping_note",
+        String croppedNote: "cropped_note",
       }) async {
     print('aqui1:$saveTo');
     return await _channel.invokeMethod('edge_detect_gallery', {
@@ -38,6 +46,8 @@ class EdgeDetection {
       'crop_black_white_title': androidCropBlackWhiteTitle,
       'crop_reset_title': androidCropReset,
       'from_gallery': true,
+      'cropping_note': croppingNote,
+      'cropped_note': croppedNote,
     });
   }
 }

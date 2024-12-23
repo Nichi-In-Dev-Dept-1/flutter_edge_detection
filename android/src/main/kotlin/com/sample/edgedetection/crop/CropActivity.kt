@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import com.sample.edgedetection.EdgeDetectionHandler
 import com.sample.edgedetection.R
 import com.sample.edgedetection.base.BaseActivity
@@ -59,6 +60,8 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
             mPresenter.crop()
             changeMenuVisibility(true)
         }
+
+
     }
 
     override fun getPaper(): ImageView = findViewById(R.id.paper)
@@ -82,9 +85,12 @@ class CropActivity : BaseActivity(), ICropView.Proxy {
         if (showMenuItems) {
             menu.findItem(R.id.action_label).isVisible = true
             findViewById<ImageView>(R.id.crop).visibility = View.GONE
+            findViewById<TextView>(R.id.textViewCrop).text = initialBundle.getString(EdgeDetectionHandler.CROPPED_NOTE)
+
         } else {
             menu.findItem(R.id.action_label).isVisible = false
             findViewById<ImageView>(R.id.crop).visibility = View.VISIBLE
+            findViewById<TextView>(R.id.textViewCrop).text = initialBundle.getString(EdgeDetectionHandler.CROPPING_NOTE)
         }
 
         return super.onCreateOptionsMenu(menu)

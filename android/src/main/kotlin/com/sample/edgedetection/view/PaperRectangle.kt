@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import com.sample.edgedetection.R
 import com.sample.edgedetection.processor.Corners
 import com.sample.edgedetection.processor.TAG
 import org.opencv.core.Point
@@ -46,11 +47,11 @@ class PaperRectangle : View {
         rectPaint.strokeCap = Paint.Cap.ROUND      // set the paint cap to round too
         rectPaint.pathEffect = CornerPathEffect(10f)
 
-        circlePaint.color = Color.WHITE
+        circlePaint.color = resources.getColor(R.color.darkBlue)
         circlePaint.isDither = true
         circlePaint.isAntiAlias = true
         circlePaint.strokeWidth = 4F
-        circlePaint.style = Paint.Style.STROKE
+        circlePaint.style = Paint.Style.FILL_AND_STROKE
     }
 
     fun onCornersDetected(corners: Corners) {
@@ -119,7 +120,7 @@ class PaperRectangle : View {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        rectPaint.color = Color.WHITE
+        rectPaint.color = resources.getColor(R.color.darkBlue)
         rectPaint.strokeWidth = 6F
         rectPaint.style = Paint.Style.STROKE
         canvas?.drawPath(path, rectPaint)
