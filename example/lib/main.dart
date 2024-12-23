@@ -48,6 +48,9 @@ class _MyAppState extends State<MyApp> {
         androidCropTitle: 'Crop',
         androidCropBlackWhiteTitle: 'Black White',
         androidCropReset: 'Reset',
+        scanningNote: "SCANNNNINGGG",
+        croppedNote: "CROPPEDDDDDD",
+        croppingNote: "CROPPPPPPINGGG"
       );
       print("success: $success");
     } catch (e) {
@@ -76,6 +79,8 @@ class _MyAppState extends State<MyApp> {
         androidCropTitle: 'Crop', // use custom localizations for android
         androidCropBlackWhiteTitle: 'Black White',
         androidCropReset: 'Reset',
+        croppedNote: "CROPPEDDDDDD",
+        croppingNote: "CROPPPPPPINGGG"
       );
       print("success: $success");
     } catch (e) {
